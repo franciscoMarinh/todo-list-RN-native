@@ -7,8 +7,9 @@
  */
 
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
 import Routes from './routes';
+import Icon from 'react-native-vector-icons/Feather';
+Icon.loadFont();
 
 const App = () => {
   return <Routes />;
