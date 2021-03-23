@@ -1,14 +1,21 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const {width} = Dimensions.get('window');
 
 const HeaderRight = () => {
+  const navigation = useNavigation();
+
+  const onClick = () => {
+    navigation.navigate('HandleTodo');
+  };
+
   return (
-    <View style={style.container}>
-      <Icon name="plus" size={35} color="#487eb0"></Icon>
-    </View>
+    <TouchableOpacity style={style.container} onPress={onClick}>
+      <Icon name="plus" size={35} color="#487eb0" />
+    </TouchableOpacity>
   );
 };
 

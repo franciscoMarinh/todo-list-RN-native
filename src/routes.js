@@ -16,7 +16,7 @@ function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="HandleTodo"
+        initialRouteName="Home"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#9c88ff',
@@ -31,7 +31,7 @@ function Routes() {
           component={HomeScreen}
           options={{
             title: 'Todo - list',
-            // headerRight: () => <HeaderRight />,
+            headerRight: (props) => <HeaderRight {...props} />,
           }}
         />
         <Stack.Screen

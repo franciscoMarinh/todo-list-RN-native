@@ -5,7 +5,7 @@ import ButtonSubmit from './components/ButtonSubmit';
 import InputTitle from './components/InputTitle';
 import CheckBoxItem from './components/CheckboxItem';
 
-const HandleTodo = () => {
+const HandleTodo = ({navigation, route}) => {
   const [state, setState] = React.useState({});
 
   const inputFieldHandle = (text) => {
@@ -13,21 +13,23 @@ const HandleTodo = () => {
   };
 
   React.useEffect(() => {
-    console.log(state);
-  });
+    if (route?.params?.todo) {
+      setState({...route.params.todo});
+    }
+  }, [route]);
 
   const checkBoxHandle = () => {
     setState({...state, completed: !state.completed});
   };
 
   const onSubmit = () => {
-    console.log('Foi clickado');
+    navigation.navigate('Home', {todo: state});
   };
 
   return (
     <View style={style.container}>
       <View style={style.cardContainer}>
-        <InputTitle onChangeText={inputFieldHandle} />
+        <InputTitle value={state.title} onChangeText={inputFieldHandle} />
         <CheckBoxItem completed={state.completed} onChange={checkBoxHandle} />
         <ButtonSubmit onSubmit={onSubmit} />
       </View>
@@ -43,6 +45,7 @@ const style = StyleSheet.create({
   },
   cardContainer: {
     backgroundColor: '#dcdde1',
+    justifyContent: 'center',
     borderRadius: 15,
     padding: 20,
     height: '50%',

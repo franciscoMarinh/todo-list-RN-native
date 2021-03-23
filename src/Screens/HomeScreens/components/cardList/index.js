@@ -1,13 +1,30 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import {useNavigation} from '@react-navigation/native';
 
-const CardList = ({item}) => {
+const CardList = ({item, removeTodo}) => {
+  const navigation = useNavigation();
+
+  const onpress = () => {
+    navigation.navigate('HandleTodo', {todo: item});
+  };
+
+  const handleRemove = () => {
+    removeTodo(item.id);
+  };
+
   return (
     <View style={style.container}>
       <Text>{item.id} -</Text>
       <Text style={style.textTitle}>{item.title}</Text>
-      <Icon name="edit-2" size={20}></Icon>
+      {item.completed && <Icon name="check" size={20} color="green" />}
+      <TouchableOpacity onPress={onpress}>
+        <Icon name="edit-2" size={20} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleRemove}>
+        <Icon name="trash" size={20} />
+      </TouchableOpacity>
     </View>
   );
 };
